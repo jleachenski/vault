@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_29_181112) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_29_182912) do
+  create_table "blocks", force: :cascade do |t|
+    t.string "zip_code"
+    t.string "neighborhood"
+    t.string "street"
+    t.integer "number"
+    t.string "additional_information"
+    t.float "latitude"
+    t.float "longitude"
+    t.integer "fee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fee_id"], name: "index_blocks_on_fee_id"
+  end
+
   create_table "fees", force: :cascade do |t|
     t.string "name"
     t.float "price_per_hour"
@@ -27,4 +41,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_29_181112) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "blocks", "fees"
 end
